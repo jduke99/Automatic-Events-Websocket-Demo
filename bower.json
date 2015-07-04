@@ -1,0 +1,15 @@
+{
+  "name": "automatic-streaming-demo",
+  "version": "0.0.1",
+  "homepage": "https://github.com/Automatic/automatic-streaming-demo",
+  "authors": [
+    "Brendan Nee <brendan@automatic.com>"
+  ],
+  "description": "Automatic Streaming Demo Application",
+  "dependencies": {
+    "bootstrap": "~3.3.5",
+    "jquery": "~2.1.4",
+    "mapbox.js": "~2.2.1",
+    "moment": "~2.10.3"
+  }
+}
