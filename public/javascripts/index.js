@@ -38,8 +38,10 @@ ws.onmessage = function(msg) {
 
   console.log(data);
 
-  hideAlert();
-
+  if(data.msg !== 'Socket Opened') {
+    hideAlert();
+  }
+  
   description.push('Date: <b>' + moment(date).format('MMM D, YYYY') + '</b>');
   description.push('Time: <b>' + moment(date).format('h:mm a') + '</b>');
 
