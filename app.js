@@ -20,14 +20,18 @@ app.set('view engine', 'jade');
 app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({
+  extended: false
+}));
 app.use(cookieParser(nconf.get('SESSION_SECRET')));
 app.use(session({
   store: store,
   secret: nconf.get('SESSION_SECRET'),
   saveUninitialized: true,
   resave: true,
-  cookie: {maxAge: 31536000000}
+  cookie: {
+    maxAge: 31536000000
+  }
 }));
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -36,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var routes = require('./routes');
 var oauth = require('./routes/oauth');
 
-if (app.get('env') !== 'development') {
+if(app.get('env') !== 'development') {
   // Force HTTPS in production
   app.all('*', routes.force_https);
 } else {

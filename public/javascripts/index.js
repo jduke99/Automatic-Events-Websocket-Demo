@@ -1,7 +1,10 @@
 // Setup mapbox
 L.mapbox.accessToken = mapboxAccessToken;
 
-var map = L.mapbox.map('map', 'automatic.h5kpm228', {maxZoom: 16}).setView([37.9, -122.5], 10);
+var map = L.mapbox.map('map', 'automatic.h5kpm228', {
+  maxZoom: 16
+}).setView([37.9, -122.5], 10);
+
 var geocoder = L.mapbox.geocoder('mapbox.places');
 var markers = [];
 var previousMarker;
@@ -22,15 +25,15 @@ var updateCount = 0;
 
 /* Web socket connection */
 var ws = new WebSocket((window.document.location.protocol === 'https:' ? 'wss://' : 'ws://') + window.document.location.host);
-ws.onopen = function() {
+ws.onopen = function () {
   updateAlert('Connected', 'Waiting for events');
 };
 
-ws.onclose = function(event) {
+ws.onclose = function (event) {
   updateAlert('Disonnected', event.reason);
 };
 
-ws.onmessage = function(msg) {
+ws.onmessage = function (msg) {
   var data = JSON.parse(msg.data);
   var date = new Date(parseInt(data.created_at));
   var description = [];
@@ -41,45 +44,50 @@ ws.onmessage = function(msg) {
   if(data.msg !== 'Socket Opened') {
     hideAlert();
   }
-  
+
   description.push('Date: <b>' + moment(date).format('MMM D, YYYY') + '</b>');
   description.push('Time: <b>' + moment(date).format('h:mm a') + '</b>');
 
-  if (data.location) {
+  if(data.location) {
     if(data.location.accuracy_m) {
       description.push('Accuracy: <b>' + data.location.accuracy_m.toFixed(0) + 'm</b>');
     }
 
-    var marker = addMarker(data.location.lat, data.location.lon, title);
+    var location = {
+      lat: parseFloat(data.location.lat),
+      lon: parseFloat(data.location.lon)
+    };
+    var marker = addMarker(location, title);
 
     updateStats();
 
-    geocoder.reverseQuery([parseFloat(data.location.lon), parseFloat(data.location.lat)], function(e, response) {
+    geocoder.reverseQuery(location, function (e, response) {
       if(e) {
         console.error(e);
       }
 
-      var location = buildLocation(response);
+      var locationName = buildLocation(response);
 
-      if(location) {
-        description.push('Location: <b>' + location + '</b>');
+      if(locationName) {
+        description.push('Location: <b>' + locationName + '</b>');
       }
 
-      marker.bindPopup(description.join('<br>'), {className: 'driveEvent-popup'});
+      marker.bindPopup(description.join('<br>'), {
+        className: 'driveEvent-popup'
+      });
       marker.openPopup();
     });
   }
 };
 
 
-setInterval(function() {
+setInterval(function () {
   ws.send('ping');
 }, 15000);
 
 
-function addMarker(lat, lon, title) {
-  var point = L.latLng(lat, lon);
-  var marker = L.marker(point, {
+function addMarker(location, title) {
+  var marker = L.marker(location, {
     title: title,
     icon: iconLatest
   });
@@ -96,12 +104,12 @@ function addMarker(lat, lon, title) {
   previousMarker = marker;
 
   if(bounds) {
-    bounds.extend(point);
+    bounds.extend(location);
   } else {
-    bounds = L.latLngBounds(point, point);
+    bounds = L.latLngBounds(location, location);
   }
 
-  map.panTo(point);
+  map.panTo(location);
   map.fitBounds(bounds);
 
   return marker;

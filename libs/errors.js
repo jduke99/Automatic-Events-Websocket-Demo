@@ -1,6 +1,6 @@
-module.exports = function(app) {
+module.exports = function (app) {
   // catch 404 errors
-  app.use(function(req, res, next) {
+  app.use(function (req, res, next) {
     var err = new Error('Not Found');
     err.status = 404;
     res.status(404);
@@ -19,7 +19,7 @@ module.exports = function(app) {
   });
 
   // catch 401 Unauthorized errors
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     if(err.status !== 401) return next(err);
     res.status(401);
     if(req.xhr) {
@@ -38,7 +38,7 @@ module.exports = function(app) {
 
 
   // log all other errors
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     console.error(err.stack || err);
     next(err);
   });
@@ -46,7 +46,7 @@ module.exports = function(app) {
   // development 500 error handler
   // will print stacktrace
   if(app.get('env') === 'development') {
-    app.use(function(err, req, res, next) {
+    app.use(function (err, req, res, next) {
       res.status(500);
       if(req.xhr) {
         res.send({
@@ -65,7 +65,7 @@ module.exports = function(app) {
 
   // production error handler
   // no stacktraces leaked to user
-  app.use(function(err, req, res, next) {
+  app.use(function (err, req, res, next) {
     res.status(500);
     if(req.xhr) {
       res.send({

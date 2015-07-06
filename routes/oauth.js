@@ -11,17 +11,18 @@ var authorization_uri = oauth2.authCode.authorizeURL({
   scope: 'scope:user:profile scope:location scope:current_location'
 });
 
-exports.authorize = function(req, res, next) {
+
+exports.authorize = function (req, res, next) {
   res.redirect(authorization_uri);
 };
 
 
-exports.redirect = function(req, res, next) {
+exports.redirect = function (req, res, next) {
   var code = req.query.code;
 
   oauth2.authCode.getToken({
     code: code
-  }, function(e, result) {
+  }, function (e, result) {
     if(e) return next(e);
 
     // Attach `token` to the user's session for later use
@@ -35,8 +36,8 @@ exports.redirect = function(req, res, next) {
 };
 
 
-exports.ensureAuthenticated = function(req, res, next) {
-  if (req.session && req.session.access_token) {
+exports.ensureAuthenticated = function (req, res, next) {
+  if(req.session && req.session.access_token) {
     return next();
   }
 
@@ -50,7 +51,7 @@ exports.ensureAuthenticated = function(req, res, next) {
 };
 
 
-exports.logout = function(req, res, next) {
+exports.logout = function (req, res, next) {
   req.session.destroy();
   res.redirect('/');
 };
