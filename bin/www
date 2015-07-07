@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-var debug = require('debug')('automatic-streaming-demo');
+var debug = require('debug')('automatic-events-websocket-demo');
 var nconf = require('nconf');
 
 nconf

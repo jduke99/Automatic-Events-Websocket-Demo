@@ -1,11 +1,11 @@
 {
-  "name": "automatic-streaming-demo",
+  "name": "automatic-events-websocket-demo",
   "version": "0.0.1",
-  "homepage": "https://github.com/Automatic/automatic-streaming-demo",
+  "homepage": "https://github.com/Automatic/automatic-events-websocket-demo",
   "authors": [
     "Brendan Nee <brendan@automatic.com>"
   ],
-  "description": "Automatic Streaming Demo Application",
+  "description": "Automatic Events Websocket Demo Application",
   "dependencies": {
     "bootstrap": "~3.3.5",
     "jquery": "~2.1.4",

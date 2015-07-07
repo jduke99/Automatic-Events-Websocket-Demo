@@ -55,7 +55,7 @@ app.get('/authorize/', oauth.authorize);
 app.get('/logout/', oauth.logout);
 app.get('/redirect/', oauth.redirect);
 
-// Connect to Automatic Streaming API
+// Connect to Automatic Events API over Websocket
 require('./libs/automatic_websocket')(app);
 
 // error handlers

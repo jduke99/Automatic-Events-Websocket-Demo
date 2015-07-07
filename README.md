@@ -1,6 +1,6 @@
-# Automatic Streaming Demo App
+# Automatic Events Websocket Demo App
 
-A node.js app to demonstrate the use of the [Automatic Streaming API](https://developer.automatic.com/). It maps realtime location events on a map.
+A node.js app to demonstrate the use of websockets via the [Automatic Events API](https://developer.automatic.com/). It maps realtime location events on a map.
 
 It make two types of websocket connections. One is to https://stream.automatic.com to stream events for all authorized users. The second is to logged-in user's browsers. The app listens to events for all authorized users of this app, but only sends to users browsers their own events. The result is that users can see a realtime stream of their own location events.
 
@@ -8,7 +8,7 @@ The app is designed responsively to work well in mobile browsers.
 
 ## Demo
 
-A version of this application is available at [https://automatic-streaming-demo.herokuapp.com](https://automatic-streaming-demo.herokuapp.com).
+A version of this application is available at [https://automatic-events-websocket-demo.herokuapp.com](https://automatic-events-websocket-demo.herokuapp.com).
 
 ## One-Click deploy to Heroku
 
@@ -41,7 +41,7 @@ Get a [mapbox access token](https://www.mapbox.com/signup/) and add it to the `c
 
 ### Run the app
 
-    gulp develop
+    DEBUG=automatic-events-websocket-demo gulp develop
 
 ### View the app
 
@@ -51,7 +51,7 @@ Open `localhost:3000` in your browser.
 
 You can test locally as a logged in user, bypassing OAuth by including an `TOKEN` and `USER_ID` when running the app.
 
-    USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> gulp develop
+    DEBUG=automatic-events-websocket-demo USER_ID=<YOUR_USER_ID> TOKEN=<YOUR-AUTOMATIC-ACCESS-TOKEN> gulp develop
 
 ## Deploying
 

@@ -1,7 +1,7 @@
 {
-  "name": "automatic-streaming-demo",
+  "name": "automatic-events-websocket-demo",
   "version": "0.0.1",
-  "description": "Automatic Streaming Demo Application",
+  "description": "Automatic Events Websocket Demo Application",
   "author": {
     "name": "Brendan Nee",
     "email": "brendan@automatic.com",
@@ -9,10 +9,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "http://github.com/automatic/automatic-streaming-demo.git"
+    "url": "http://github.com/automatic/automatic-events-websocket-demo.git"
   },
   "bugs": {
-    "url": "http://github.com/automatic/automatic-streaming-demo/issues"
+    "url": "http://github.com/automatic/automatic-events-websocket-demo/issues"
   },
   "license": "Apache-2.0",
   "dependencies": {

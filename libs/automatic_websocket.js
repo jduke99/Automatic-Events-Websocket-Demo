@@ -1,4 +1,4 @@
-var debug = require('debug')('automatic-streaming-demo');
+var debug = require('debug')('automatic-events-websocket-demo');
 var nconf = require('nconf');
 
 module.exports = function (app) {
