@@ -8,7 +8,7 @@ The app is designed responsively to work well in mobile browsers.
 
 ## Demo
 
-A version of this application is available at [https://automatic-events-websocket-demo.herokuapp.com](https://automatic-events-websocket-demo.herokuapp.com).
+A version of this application is available at [https://automatic-events-websocketdemo.herokuapp.com](https://automatic-events-websocketdemo.herokuapp.com).
 
 ## One-Click deploy to Heroku
 
