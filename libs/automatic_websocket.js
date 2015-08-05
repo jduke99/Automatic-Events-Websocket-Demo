@@ -3,7 +3,7 @@ var nconf = require('nconf');
 
 module.exports = function (app) {
 
-  var automaticSocketURL = 'https://stream.automatic.com?token=' + nconf.get('AUTOMATIC_CLIENT_ID') + ':' + nconf.get('AUTOMATIC_CLIENT_SECRET');
+  var automaticSocketURL = nconf.get('AUTOMATIC_WEBSOCKET_URL') + '?token=' + nconf.get('AUTOMATIC_CLIENT_ID') + ':' + nconf.get('AUTOMATIC_CLIENT_SECRET');
   var automaticSocket = require('socket.io-client')(automaticSocketURL);
 
   automaticSocket.on('connect', function () {

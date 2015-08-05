@@ -30,7 +30,7 @@ ws.onopen = function () {
 };
 
 ws.onclose = function (event) {
-  updateAlert('Disonnected', event.reason);
+  updateAlert('Disconnected', event.reason);
 };
 
 ws.onmessage = function (msg) {
