@@ -16,6 +16,7 @@
     "AUTOMATIC_CLIENT_SECRET": {
       "description": "Your Automatic Client Secret. Get one from developer.automatic.com"
     },
+    "AUTOMATIC_WEBSOCKET_URL": "https://stream.automatic.com",
     "MAPBOX_ACCESS_TOKEN": {
       "description": "A mapbox access token. Generate one at mapbox.com"
     },
