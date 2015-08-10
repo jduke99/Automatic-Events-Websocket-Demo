@@ -11,7 +11,7 @@ module.exports = function (app) {
     debug('Incoming Location: ' + JSON.stringify(data));
 
     var browserSocket = app.get('wss');
-    if(browserSocket) {
+    if (browserSocket) {
       browserSocket.sendEvent(data);
     }
   }

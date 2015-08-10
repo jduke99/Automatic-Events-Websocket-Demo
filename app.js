@@ -40,7 +40,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 var routes = require('./routes');
 var oauth = require('./routes/oauth');
 
-if(app.get('env') !== 'development') {
+if (app.get('env') !== 'development') {
   // Force HTTPS in production
   app.all('*', routes.force_https);
 } else {

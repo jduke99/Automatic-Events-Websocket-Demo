@@ -40,7 +40,7 @@ ws.onmessage = function (msg) {
 
   console.log(data);
 
-  if(data.msg !== 'Socket Opened') {
+  if (data.msg !== 'Socket Opened') {
     hideAlert();
   }
 
@@ -59,7 +59,7 @@ ws.onmessage = function (msg) {
   } else if (data.type === 'notification:hard_brake') {
     description.push('Deceleration: <b>' + data.g_force.toFixed(3) + 'g</b>');
   } else if (data.type === 'mil:on' || data.type == 'mil:off') {
-    if(data.dtcs) {
+    if (data.dtcs) {
       data.dtcs.forEach(function(dtc) { description.push('MIL: <b>' + dtc.code + ': ' + dtc.description + '</b>'); });
     }
   }
@@ -67,8 +67,8 @@ ws.onmessage = function (msg) {
   description.push('Date: <b>' + moment(data.created_at).format('MMM D, YYYY') + '</b>');
   description.push('Time: <b>' + moment(data.created_at).format('h:mm a') + '</b>');
 
-  if(data.location) {
-    if(data.location.accuracy_m) {
+  if (data.location) {
+    if (data.location.accuracy_m) {
       description.push('Accuracy: <b>' + data.location.accuracy_m.toFixed(0) + 'm</b>');
     }
 
@@ -80,14 +80,14 @@ ws.onmessage = function (msg) {
 
     updateStats();
 
-    geocoder.reverseQuery(location, function (e, response) {
-      if(e) {
+    geocoder.reverseQuery(location, function(e, response) {
+      if (e) {
         console.error(e);
       }
 
-      var locationName = buildLocation(response);
+      var locationName = formatLocation(response);
 
-      if(locationName) {
+      if (locationName) {
         description.push('Location: <b>' + locationName + '</b>');
       }
 
@@ -114,7 +114,7 @@ function addMarker(location, title) {
   marker.addTo(markerLayer);
 
   //change previous marker to standard Icon
-  if(previousMarker) {
+  if (previousMarker) {
     previousMarker.setIcon(icon);
     drawLine(previousMarker, marker);
   }
@@ -122,7 +122,7 @@ function addMarker(location, title) {
 
   previousMarker = marker;
 
-  if(bounds) {
+  if (bounds) {
     bounds.extend(location);
   } else {
     bounds = L.latLngBounds(location, location);
@@ -181,7 +181,7 @@ function updateStats() {
 }
 
 
-function buildLocation(response) {
+function formatLocation(response) {
   try {
     return response.features[0].place_name;
   } catch(e) {
