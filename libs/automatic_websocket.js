@@ -6,21 +6,33 @@ module.exports = function (app) {
   var automaticSocketURL = nconf.get('AUTOMATIC_WEBSOCKET_URL') + '?token=' + nconf.get('AUTOMATIC_CLIENT_ID') + ':' + nconf.get('AUTOMATIC_CLIENT_SECRET');
   var automaticSocket = require('socket.io-client')(automaticSocketURL);
 
-  automaticSocket.on('connect', function () {
-    debug('Automatic Websocket Connected');
-  });
 
-  automaticSocket.on('location:updated', function (data) {
+  function sendEventToUser(data) {
     debug('Incoming Location: ' + JSON.stringify(data));
 
     var browserSocket = app.get('wss');
     if(browserSocket) {
       browserSocket.sendEvent(data);
     }
+  }
+
+  automaticSocket.on('connect', function () {
+    debug('Automatic Websocket Connected');
   });
 
+  automaticSocket.on('trip:finished', sendEventToUser);
+  automaticSocket.on('ignition:on', sendEventToUser);
+  automaticSocket.on('ignition:off', sendEventToUser);
+  automaticSocket.on('notification:speeding', sendEventToUser);
+  automaticSocket.on('notification:hard_brake', sendEventToUser);
+  automaticSocket.on('notification:hard_accel', sendEventToUser);
+  automaticSocket.on('mil:on', sendEventToUser);
+  automaticSocket.on('mil:off', sendEventToUser);
+  automaticSocket.on('location:updated', sendEventToUser);
+
   automaticSocket.on('error', function (data) {
-    debug('Automatic Websocket Error:', data);
+    console.error('Automatic Websocket Error:', data);
+    console.error(data.stack);
   });
 
   automaticSocket.on('reconnecting', function (attemptNumber) {

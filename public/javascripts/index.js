@@ -35,9 +35,8 @@ ws.onclose = function (event) {
 
 ws.onmessage = function (msg) {
   var data = JSON.parse(msg.data);
-  var date = new Date(parseInt(data.created_at));
   var description = [];
-  var title = 'Location Updated';
+  var title = getEventName(data.type);
 
   console.log(data);
 
@@ -45,8 +44,28 @@ ws.onmessage = function (msg) {
     hideAlert();
   }
 
-  description.push('Date: <b>' + moment(date).format('MMM D, YYYY') + '</b>');
-  description.push('Time: <b>' + moment(date).format('h:mm a') + '</b>');
+  description.push('<b>' + title + '</b>');
+
+  if (data.type === 'trip:finished') {
+    description.push('Distance: <b>' + metersToMiles(data.trip.distance_m).toFixed(1) + ' miles</b>');
+    description.push('Duration: <b>' + formatDuration(data.trip.duration_s) + '</b>');
+    description.push('Average MPG: <b>' + kmplToMPG(data.trip.average_kmpl).toFixed(1) + ' mpg</b>');
+    description.push('Start Location: <b>' + data.trip.start_address.name + '</b>');
+    description.push('End Location: <b>' + data.trip.end_address.name + '</b>');
+  } else if (data.type === 'notification:speeding') {
+    description.push('Speed: <b>' + kmphToMPH(data.speed_kmph).toFixed() + ' mph</b>');
+  } else if (data.type === 'notification:hard_accel') {
+    description.push('Acceleration: <b>' + data.g_force.toFixed(3) + 'g</b>');
+  } else if (data.type === 'notification:hard_brake') {
+    description.push('Deceleration: <b>' + data.g_force.toFixed(3) + 'g</b>');
+  } else if (data.type === 'mil:on' || data.type == 'mil:off') {
+    if(data.dtcs) {
+      data.dtcs.forEach(function(dtc) { description.push('MIL: <b>' + dtc.code + ': ' + dtc.description + '</b>'); });
+    }
+  }
+
+  description.push('Date: <b>' + moment(data.created_at).format('MMM D, YYYY') + '</b>');
+  description.push('Time: <b>' + moment(data.created_at).format('h:mm a') + '</b>');
 
   if(data.location) {
     if(data.location.accuracy_m) {
@@ -123,6 +142,23 @@ function drawLine(marker1, marker2) {
     weight: 4
   };
   L.polyline([marker1.getLatLng(), marker2.getLatLng()], lineStyle).addTo(map);
+}
+
+
+function getEventName(type) {
+  var events = {
+    'ignition:on': 'Ignition On',
+    'ignition:off': 'Ignition Off',
+    'trip:finished': 'Trip Summary',
+    'notification:speeding': 'Speed Exceeded Threshold',
+    'notification:hard_brake': 'Hard Brake',
+    'notification:hard_accel': 'Hard Acceleration',
+    'mil:on': 'MIL (check engine light) On',
+    'mil:off': 'MIL (check engine light) Cleared',
+    'location:updated': 'Location Updated'
+  };
+
+  return events[type] || type || 'Unknown';
 }
 
 
