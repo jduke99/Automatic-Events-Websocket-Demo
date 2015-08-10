@@ -1,8 +1,10 @@
 # Automatic Events Websocket Demo App
 
-A node.js app to demonstrate the use of websockets via the [Automatic Events API](https://developer.automatic.com/). It maps realtime location events on a map.
+A node.js app to demonstrate the use of websockets via the [Automatic Events API](https://developer.automatic.com/api-reference/#real-time-events). It maps real-time events on a map.
 
-It make two types of websocket connections. One is to https://stream.automatic.com to stream events for all authorized users. The second is to logged-in user's browsers. The app listens to events for all authorized users of this app, but only sends to users browsers their own events. The result is that users can see a realtime stream of their own location events.
+![websocket-screenshot](https://cloud.githubusercontent.com/assets/96217/9145466/77c7143e-3d09-11e5-9228-e03d34f2c9ef.png)
+
+It make two types of websocket connections. One is to https://stream.automatic.com to stream events for all authorized users. The second type is a connect to each logged-in user's browsers. The app listens to events for all authorized users of this app, but only sends to user's browsers their own events. The result is that each user sees a realtime stream of their own vehicle events on a map.
 
 The app is designed responsively to work well in mobile browsers.
 
