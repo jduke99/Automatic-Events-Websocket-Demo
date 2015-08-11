@@ -53,7 +53,7 @@ ws.onmessage = function (msg) {
     description.push('Start Location: <b>' + data.trip.start_address.name + '</b>');
     description.push('End Location: <b>' + data.trip.end_address.name + '</b>');
   } else if (data.type === 'notification:speeding') {
-    description.push('Speed: <b>' + kmphToMPH(data.speed_kmph).toFixed() + ' mph</b>');
+    description.push('Speed: <b>' + kmphToMPH(data.velocity_kph).toFixed() + ' mph</b>');
   } else if (data.type === 'notification:hard_accel') {
     description.push('Acceleration: <b>' + data.g_force.toFixed(3) + 'g</b>');
   } else if (data.type === 'notification:hard_brake') {
