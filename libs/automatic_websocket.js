@@ -8,7 +8,7 @@ module.exports = function (app) {
 
 
   function sendEventToUser(data) {
-    debug('Incoming Location: ' + JSON.stringify(data));
+    debug('Incoming Event: ' + JSON.stringify(data));
 
     var browserSocket = app.get('wss');
     if (browserSocket) {
@@ -17,7 +17,7 @@ module.exports = function (app) {
   }
 
   automaticSocket.on('connect', function () {
-    debug('Automatic Websocket Connected');
+    debug('Automatic Websocket Connected', nconf.get('AUTOMATIC_WEBSOCKET_URL'));
   });
 
   automaticSocket.on('trip:finished', sendEventToUser);
