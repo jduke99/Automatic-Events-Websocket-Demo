@@ -31,14 +31,5 @@ html(lang="en")
                 li
                   a(href="/logout/") Log Out
                   
-    block content
-    
-    script.
-      var mapboxAccessToken = '#{mapboxAccessToken}';
-
-    script(src="/bower_components/mapbox.js/mapbox.js")
-    script(src="/bower_components/jquery/dist/jquery.min.js")
-    script(src="/bower_components/bootstrap/dist/js/bootstrap.min.js")
-    script(src="/bower_components/moment/min/moment.min.js")
-    script(src="/javascripts/helpers.js")
-    script(src="/javascripts/index.js")
+    block content  
+    block scripts
