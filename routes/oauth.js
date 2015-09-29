@@ -9,7 +9,7 @@ var oauth2 = require('simple-oauth2')({
 });
 
 var authorization_uri = oauth2.authCode.authorizeURL({
-  scope: 'scope:user:profile scope:location scope:current_location'
+  scope: 'scope:public scope:user:profile scope:location scope:current_location scope:vehicle:profile scope:vehicle:events scope:vehicle:vin scope:trip scope:behavior'
 });
 
 
