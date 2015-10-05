@@ -29,6 +29,8 @@ module.exports = function (app) {
   automaticSocket.on('mil:on', sendEventToUser);
   automaticSocket.on('mil:off', sendEventToUser);
   automaticSocket.on('location:updated', sendEventToUser);
+  automaticSocket.on('vehicle:setup', sendEventToUser);
+  automaticSocket.on('vehicle:status_report', sendEventToUser);
 
   automaticSocket.on('error', function (data) {
     console.error('Automatic Websocket Error:', data);

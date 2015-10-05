@@ -155,7 +155,9 @@ function getEventName(type) {
     'notification:hard_accel': 'Hard Acceleration',
     'mil:on': 'MIL (check engine light) On',
     'mil:off': 'MIL (check engine light) Cleared',
-    'location:updated': 'Location Updated'
+    'location:updated': 'Location Updated',
+    'vehicle:setup': 'Vehicle Setup',
+    'vehicle:status_report': 'Vehicle Status Report'
   };
 
   return events[type] || type || 'Unknown';
