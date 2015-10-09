@@ -15,7 +15,9 @@ exports.setupClientWebsocket = function (app) {
       var sessionID = client.upgradeReq.signedCookies['connect.sid'];
       var store = app.get('store');
       store.get(sessionID, function (e, session) {
-        client.user_id = session.user_id;
+        if(session && session.user_id) {
+          client.user_id = session.user_id;
+        }
       });
     });
   });
