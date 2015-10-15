@@ -7,9 +7,9 @@
   ],
   "description": "Automatic Events Websocket Demo Application",
   "dependencies": {
-    "bootstrap": "~3.3.5",
-    "jquery": "~2.1.4",
-    "mapbox.js": "~2.2.1",
-    "moment": "~2.10.3"
+    "bootstrap": "3.3.5",
+    "jquery": "2.1.4",
+    "mapbox.js": "2.2.1",
+    "moment": "2.10.6"
   }
 }
