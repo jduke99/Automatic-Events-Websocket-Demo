@@ -1,22 +1,21 @@
-var debug = require('debug')('automatic-events-websocket-demo');
-var nconf = require('nconf');
+const debug = require('debug')('automatic-events-websocket-demo');
+const nconf = require('nconf');
 
-module.exports = function (app) {
-
-  var automaticSocketURL = nconf.get('AUTOMATIC_WEBSOCKET_URL') + '?token=' + nconf.get('AUTOMATIC_CLIENT_ID') + ':' + nconf.get('AUTOMATIC_CLIENT_SECRET');
-  var automaticSocket = require('socket.io-client')(automaticSocketURL);
+module.exports = (app) => {
+  const automaticSocketURL = nconf.get('AUTOMATIC_WEBSOCKET_URL') + '?token=' + nconf.get('AUTOMATIC_CLIENT_ID') + ':' + nconf.get('AUTOMATIC_CLIENT_SECRET');
+  const automaticSocket = require('socket.io-client')(automaticSocketURL);
 
 
   function sendEventToUser(data) {
     debug('Incoming Event: ' + JSON.stringify(data));
 
-    var browserSocket = app.get('wss');
+    const browserSocket = app.get('wss');
     if (browserSocket) {
       browserSocket.sendEvent(data);
     }
   }
 
-  automaticSocket.on('connect', function () {
+  automaticSocket.on('connect', () => {
     debug('Automatic Websocket Connected', nconf.get('AUTOMATIC_WEBSOCKET_URL'));
   });
 
@@ -32,24 +31,24 @@ module.exports = function (app) {
   automaticSocket.on('vehicle:setup', sendEventToUser);
   automaticSocket.on('vehicle:status_report', sendEventToUser);
 
-  automaticSocket.on('error', function (data) {
+  automaticSocket.on('error', (data) => {
     console.error('Automatic Websocket Error:', data);
     console.error(data.stack);
   });
 
-  automaticSocket.on('reconnecting', function (attemptNumber) {
+  automaticSocket.on('reconnecting', (attemptNumber) => {
     debug('Automatic Websocket Reconnecting! - attempt ' + attemptNumber);
   });
 
-  automaticSocket.on('reconnect_error', function (error) {
+  automaticSocket.on('reconnect_error', (error) => {
     debug('Automatic Websocket Reconnection error!\n', error);
   });
 
-  automaticSocket.on('reconnect', function (attemptNumber) {
+  automaticSocket.on('reconnect', (attemptNumber) => {
     debug('Automatic Websocket Reconnected on attempt ' + attemptNumber);
   });
 
-  automaticSocket.on('disconnect', function () {
+  automaticSocket.on('disconnect', () => {
     debug('Automatic Websocket Disconnected');
   });
 };

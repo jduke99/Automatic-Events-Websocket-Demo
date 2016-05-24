@@ -1,5 +1,5 @@
-// Setup mapbox
-L.mapbox.accessToken = mapboxAccessToken;
+// Setup mapbox, replace with your own mapbox access token
+L.mapbox.accessToken = 'pk.eyJ1IjoiYXV0b21hdGljIiwiYSI6ImJkMDczODEyODc5MjRjMTEyNjY2YTA2MzE2YTg3YWZmIn0.Y1kpQJrDMWIHyHoJer52Ug';
 
 var map = L.mapbox.map('map', 'automatic.h5kpm228', {
   maxZoom: 16
@@ -113,7 +113,7 @@ function addMarker(location, title) {
 
   marker.addTo(markerLayer);
 
-  //change previous marker to standard Icon
+  // Change previous marker to standard Icon
   if (previousMarker) {
     previousMarker.setIcon(icon);
     drawLine(previousMarker, marker);
@@ -186,7 +186,7 @@ function updateStats() {
 function formatLocation(response) {
   try {
     return response.features[0].place_name;
-  } catch(e) {
+  } catch (e) {
     return '';
   }
 }

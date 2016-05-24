@@ -13,9 +13,9 @@ function metersToMiles(distance_m) {
 }
 
 
-function formatDuration(s) {
-  var duration = moment.duration(s, 'seconds'),
-      hours = (duration.asHours() >= 1) ? Math.floor(duration.asHours()) + ' h ' : '',
-      minutes = duration.minutes() + ' min';
+function formatDuration(ms) {
+  var duration = moment.duration(ms, 'ms');
+  var hours = duration.asHours() >= 1 ? Math.floor(duration.asHours()) + ' h ' : '';
+  var minutes = duration.minutes() + ' min';
   return hours + minutes;
 }
